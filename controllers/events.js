@@ -1,6 +1,16 @@
 const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
 
+function isInvalidObjectId(id){
+  //from https://www.geeksforgeeks.org/node-js/how-to-check-if-a-string-is-valid-mongodb-objectid-in-node-js/
+    if(ObjectId.isValid(id)){
+        if((String)(new ObjectId(id)) === id)
+            return false;
+        return true;
+    }
+    return true;
+}
+
 const getAll = (req, res) => {
 //#swagger.tags=['Events']
   try {
@@ -24,7 +34,7 @@ const getAll = (req, res) => {
 const getSingle = (req, res) => {
 //#swagger.tags=['Events']
   try{
-    if (!ObjectId.isValid(req.params.id)) {
+    if (isInvalidObjectId(req.params.id)) {
       res.status(400).json('Invalid ID.');
     }
     const userId = new ObjectId(req.params.id);
@@ -69,7 +79,7 @@ const createEvent = async (req, res) => {
 const updateEvent = async (req, res) => {
 //#swagger.tags=['Events']
   try {
-    if (!ObjectId.isValid(req.params.id)) {
+    if (isInvalidObjectId(req.params.id)) {
       res.status(400).json('Invalid ID.');
     }
     const userId = new ObjectId(req.params.id);

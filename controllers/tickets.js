@@ -1,7 +1,8 @@
 const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
 
-function isInvalidObjectId(id){   
+function isInvalidObjectId(id){
+  //from https://www.geeksforgeeks.org/node-js/how-to-check-if-a-string-is-valid-mongodb-objectid-in-node-js/
     if(ObjectId.isValid(id)){
         if((String)(new ObjectId(id)) === id)
             return false;
@@ -9,7 +10,6 @@ function isInvalidObjectId(id){
     }
     return true;
 }
-
 
 const getAll = (req, res) => {
 //#swagger.tags=['Tickets']
