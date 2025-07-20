@@ -1,0 +1,133 @@
+const mongodb = require('../db/connect');
+const ObjectId = require('mongodb').ObjectId;
+
+// const getAll = async (req, res) => {
+//   const result = await mongodb.getDb().db().collection('events').find();
+//   result.toArray().then((lists) => {
+//     res.setHeader('Content-Type', 'application/json');
+//     res.status(200).json(lists);
+//   });
+// };
+
+// const getAll = async (req, res) => {
+//   const result = await mongodb.getDb().db().collection('events').find();
+//   result.toArray((err, lists) =>{
+//     if (err) {
+//       res.status(400).json({ message: err });
+//     }
+//     res.setHeader('Content-Type', 'application/json');
+//     res.status(200).json(lists);
+//   });
+// };
+
+const getAll = (req, res) => {
+//#swagger.tags=['Events']
+  mongodb
+    .getDb()
+    .db()
+    .collection('events')
+    .find()
+    .toArray((err, lists) => {
+      if (err) {
+        res.status(400).json({ message: err});
+      }
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
+    });
+};
+
+// const getSingle = async (req, res) => {
+//   const userId = new ObjectId(req.params.id);
+//   const result = await mongodb.getDb().db().collection('events').find({ _id: userId });
+//   result.toArray().then((lists) => {
+//     res.setHeader('Content-Type', 'application/json');
+//     res.status(200).json(lists[0]);
+//   });
+// };
+
+const getSingle = (req, res) => {
+//#swagger.tags=['Events']
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Invalid ID.');
+  }
+  const userId = new ObjectId(req.params.id);
+  mongodb
+    .getDb()
+    .db()
+    .collection('events')
+    .find({ _id: userId})
+    .toArray((err, lists) => {
+      if (err) {
+        res.status(400).json({ message: err});
+      }
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
+    });
+};
+
+const createEvent = async (req, res) => {
+//#swagger.tags=['Events']
+  const event = {
+    eventName: req.body.eventName,
+    eventDate: req.body.eventDate,
+    startTime: req.body.startTime,
+    capacity: req.body.capacity,
+    location: req.body.location
+  };
+  const response = await mongodb.getDb().db().collection('events').insertOne(event);
+  if (response.acknowledged) {
+    res.status(201).json(response);
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while creating the event.');
+  }
+};
+
+const updateEvent = async (req, res) => {
+//#swagger.tags=['Events']
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Invalid ID.');
+  }
+  const userId = new ObjectId(req.params.id);
+  // be aware of updateOne if you only want to update specific fields
+  const event = {
+    eventName: req.body.eventName,
+    eventDate: req.body.eventDate,
+    startTime: req.body.startTime,
+    capacity: req.body.capacity,
+    location: req.body.location
+  };
+  const response = await mongodb
+    .getDb()
+    .db()
+    .collection('events')
+    .replaceOne({ _id: userId }, event);
+  console.log(response);
+  if (response.modifiedCount > 0) {
+    res.status(204).send();
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while updating the event.');
+  }
+};
+
+const deleteEvent = async (req, res) => {
+//#swagger.tags=['Events']
+    if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Invalid ID.');
+  }
+  const userId = new ObjectId(req.params.id);
+  const response = await mongodb.getDb().db().collection('events').remove({ _id: userId }, true);
+  console.log(response);
+  if (response.deletedCount > 0) {
+    res.status(204).send();
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while deleting the event.');
+  }
+};
+
+module.exports = {
+  getAll,
+  getSingle,
+  createEvent,
+  updateEvent,
+  deleteEvent
+};
