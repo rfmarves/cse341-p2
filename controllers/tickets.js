@@ -88,7 +88,7 @@ const createTicket = async (req, res) => {
 const updateTicket = async (req, res) => {
 //#swagger.tags=['Tickets']
   try {
-    if (isInvalidObjectId(req.body.eventId)) {
+    if (isInvalidObjectId(req.params.id)) {
       res.status(400).json('Invalid ID.');
     }
     if (isInvalidObjectId(req.body.eventId)) {

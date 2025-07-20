@@ -109,7 +109,7 @@ const updateEvent = async (req, res) => {
 const deleteEvent = async (req, res) => {
 //#swagger.tags=['Events']
   try {
-    if (!ObjectId.isValid(req.params.id)) {
+    if (isInvalidObjectId(req.params.id)) {
       res.status(400).json('Invalid ID.');
     }
     const userId = new ObjectId(req.params.id);
