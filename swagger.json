@@ -5,7 +5,7 @@
     "description": "API for ticking data as project2 for CSE 341",
     "version": "1.0.0"
   },
-  "host": "https://ticketing-api-kaep.onrender.com",
+  "host": "ticketing-api-kaep.onrender.com",
   "basePath": "/",
   "schemes": [ "https"],
   "paths": {
