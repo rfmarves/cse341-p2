@@ -5,8 +5,8 @@ const doc = {
     title: 'Ticketing API',
     description: 'API for ticking data as project2 for CSE 341'
   },
-  host: 'localhost:3000',
-  schemes: ['http', 'https']
+  host: 'https://ticketing-api-kaep.onrender.com',
+  schemes: ['https']
 };
 
 const outputFile = './swagger.json';
