@@ -15,9 +15,13 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.16.3",
+    "express-session": "^1.18.2",
     "mongodb": "^4.4.0",
+    "passport": "^0.7.0",
+    "passport-github2": "^0.1.12",
     "swagger-ui-express": "^4.3.0",
     "validatorjs": "^3.22.1"
   },
@@ -25,7 +29,7 @@
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "nodemon": "^1.18.4",
+    "nodemon": "^3.1.10",
     "prettier": "^2.5.1",
     "swagger-autogen": "^2.19.0"
   }

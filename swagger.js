@@ -2,7 +2,7 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
   info: {
-    title: 'Ticking API',
+    title: 'Ticketing API',
     description: 'API for ticking data as project2 for CSE 341'
   },
   host: 'localhost:3000',

@@ -1,13 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Ticking API",
+    "title": "Ticketing API",
     "description": "API for ticking data as project2 for CSE 341",
     "version": "1.0.0"
   },
-  "host": "ticketing-api-kaep.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
+    "http",
     "https"
   ],
   "paths": {
@@ -27,6 +28,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -97,6 +101,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -194,6 +201,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -209,6 +219,9 @@
             "schema": {
               "type": "object",
               "properties": {
+                "eventId": {
+                  "example": "any"
+                },
                 "firstName": {
                   "example": "any"
                 },
@@ -216,9 +229,6 @@
                   "example": "any"
                 },
                 "email": {
-                  "example": "any"
-                },
-                "eventId": {
                   "example": "any"
                 },
                 "amountPaid": {
@@ -279,6 +289,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -300,6 +313,9 @@
             "schema": {
               "type": "object",
               "properties": {
+                "eventId": {
+                  "example": "any"
+                },
                 "firstName": {
                   "example": "any"
                 },
@@ -307,9 +323,6 @@
                   "example": "any"
                 },
                 "email": {
-                  "example": "any"
-                },
-                "eventId": {
                   "example": "any"
                 },
                 "amountPaid": {
